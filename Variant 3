@@ -1,0 +1,36 @@
+public class UniquePaths {
+
+    public static int countUniquePaths(int m, int n) {
+        // Инициализация матрицы для хранения количества путей
+        int[][] paths = new int[m][n];
+
+        // Заполнение первой строки и первого столбца единицами, так как там только один способ дойти до каждой ячейки
+        for (int i = 0; i < m; i++) {
+            paths[i][0] = 1;
+        }
+        for (int j = 0; j < n; j++) {
+            paths[0][j] = 1;
+        }
+
+        // Заполнение матрицы количеством уникальных путей
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                paths[i][j] = paths[i - 1][j] + paths[i][j - 1];
+            }
+        }
+
+        // Возвращение количества уникальных путей в правый нижний угол
+        return paths[m - 1][n - 1];
+    }
+
+    public static void main(String[] args) {
+        // Пример использования
+        int rows = 3;
+        int cols = 7;
+
+        int uniquePaths = countUniquePaths(rows, cols);
+
+        // Вывод результата
+        System.out.println("Количество уникальных путей: " + uniquePaths);
+    }
+}
